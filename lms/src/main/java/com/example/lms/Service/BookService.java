@@ -34,31 +34,7 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
-    public Book borrowBook(Long bookId, Long userId) {
-        Book book = findById(bookId);
-        User user = userRepository.findById(userId).orElse(null);
 
-        if (book != null && !book.isBorrowed() && user != null) {
-            book.setBorrowedBy(user);
-            book.setBorrowed(true);
-            return save(book);
-        }
-
-        return null;
-    }
-
-    public Book returnBook(Long bookId) {
-        Book book = findById(bookId);
-        if (book != null && book.isBorrowed()) {
-            book.setBorrowedBy(null);
-            book.setBorrowed(false);
-            return save(book);
-        }
-
-        return null;
-    }
 }
-
-
 
 
